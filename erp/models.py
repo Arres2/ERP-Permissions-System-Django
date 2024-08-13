@@ -23,7 +23,12 @@ class Permission(models.Model):
         return f"{self.name}"
 
 class Role(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    ROLE_CHOICES = [
+        ('ADMIN', 'Admin'),
+        ('LEAD', 'Team Lead'),
+        ('USER', 'User'),
+    ]
+    name = models.CharField(max_length=100, unique=True, choices=ROLE_CHOICES)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
@@ -58,4 +63,4 @@ class UserPermission(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.user.username} - {self.permission.name} - {self.module.name}"
+        return f"{self.user.username} - {self.permission.name} - {self.module.name} - {self.role.name}"
