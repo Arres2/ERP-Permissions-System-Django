@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from .decorators import check_module_permission
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .models import Module, Permission, Role, UserRole, UserPermission
+from .models import Module, Permission, Role, RolePermission, UserPermission
 from .serializers import UserSerializer, RoleSerializer, PermissionSerializer, ModuleSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -109,7 +109,7 @@ class UserViewSet(viewsets.ModelViewSet):
             user=user,
             permission__name=permission_name,
             module__name=module_name
-        ).exists() or UserRole.objects.filter(
+        ).exists() or UserPermission.objects.filter(
             user=user,
             role__permissions__name=permission_name
         ).exists()

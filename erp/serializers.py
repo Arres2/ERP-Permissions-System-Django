@@ -45,12 +45,12 @@ class RoleSerializer(serializers.ModelSerializer):
         model = Role
         fields = '__all__'
 
-class UserRoleSerializer(serializers.ModelSerializer):
+class RolePermissionSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     role = RoleSerializer(read_only=True)
 
     class Meta:
-        model = UserRole
+        model = RolePermission
         fields = '__all__'
 
 class UserPermissionSerializer(serializers.ModelSerializer):

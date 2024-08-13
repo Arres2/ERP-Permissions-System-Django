@@ -1,7 +1,7 @@
 from functools import wraps
 from rest_framework.response import Response
 from rest_framework import status
-from .models import UserPermission, UserRole
+from .models import UserPermission, RolePermission
 
 def check_module_permission(permission_name, module_name):
     def decorator(view_func):
@@ -14,9 +14,8 @@ def check_module_permission(permission_name, module_name):
             has_permission = UserPermission.objects.filter(
                 user=user,
                 permission__name=permission_name,
-                module__name=module_name
-            ).exists() or UserRole.objects.filter(
-                user=user,
+                module__name=module_name,
+            ).exists() or RolePermission.objects.filter(
                 role__permissions__name=permission_name
             ).exists()
             

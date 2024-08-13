@@ -52,6 +52,7 @@ class RolePermission(models.Model):
 
 class UserPermission(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
     permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
