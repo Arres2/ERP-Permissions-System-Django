@@ -4,7 +4,7 @@ from .models import *
 admin.site.register(Module)
 admin.site.register(Permission)
 admin.site.register(Role)
-admin.site.register(UserRole)
+admin.site.register(RolePermission)
 admin.site.register(UserPermission)
 
 
